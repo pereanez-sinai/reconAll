@@ -1,0 +1,62 @@
+{
+  "name": "reconall",
+  "label": "Freesurfer - recon-all",
+  "description": "Freesurfer - recon-all with directive options",
+  "author": "Freesurfer",
+  "cite": "",
+  "maintainer": "Flywheel <support@flywheel.io>",
+  "source": "https://github.com/flywheel-apps/pereanez-sinai",
+  "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all#RequiredArguments",
+  "version": "0.1_6.0",
+  "custom": {
+    "docker-image": "pereanez/reconall:0.1",
+    "gear-builder": {
+      "category": "analysis",
+      "image": "pereanez/reconall:0.1"
+    }
+  },
+
+  "license": "MIT",
+
+  "inputs": {
+    "api_key": {
+      "base": "api-key"
+    },
+    "t1w_anatomy": {
+      "description": "T1 weighted anatomical NIfTI file. When provided this file will be used in place of any T1w images found in the current session.",
+      "base": "file",
+      "optional": true,
+      "type": {
+        "enum": [
+          "nifti"
+        ]
+      }
+    }
+  },
+
+  "config": {
+
+    "subject_id": {
+      "description": "ID for the subject",
+      "type": "string",
+      "optional": false
+    },
+
+    "directive": {
+      "description": "subset of processes to be done",
+      "type": "string",
+      "optional": false,
+      "enum": [
+        "all",
+        "autorecon1",
+        "autorecon2",
+        "autorecon2-cp",
+        "autorecon2-wm",
+        "autorecon2-pial",
+        "autorecon3",
+        "hemi lh",
+        "hemi rh"
+      ]
+    }
+    }
+}
