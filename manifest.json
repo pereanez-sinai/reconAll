@@ -25,7 +25,6 @@
     "t1w_anatomy": {
       "description": "T1 weighted anatomical NIfTI file. When provided this file will be used in place of any T1w images found in the current session.",
       "base": "file",
-      "optional": true,
       "type": {
         "enum": [
           "nifti"

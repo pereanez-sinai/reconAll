@@ -7,8 +7,8 @@ logging.basicConfig(level='INFO')
 log = logging.getLogger(__name__)
 
 
-def create_command(subject_id, directive, input):
-    command = f'recon-all -subject {subject_id} -i {input} -{directive} '
+def create_command(subject_id, input_volume, directive):
+    command = f'recon-all -subject {subject_id} -i {input_volume} -{directive} '
     log.info(command)
 
     return command
@@ -29,21 +29,28 @@ def call_command(command):
     pass
 
 
-def cleanup(subject_id):
-    output = 'flywheel/v0/output/{}'.subject_id
-    input = '/opt/freesurfer/subjects/{}'.subject_id
-    shutil.copytree(input, output)
+def cleanup(subject_id, directive):
+    output_freesurf = f'/opt/freesurfer/subjects/{subject_id}'
+    output_flywheel = f'flywheel/v0/output/{subject_id}_{directive}'
 
-    # zip output/10000 to preserve directory structure
-    # remove the unzipped directory
-    # id_reconall.zip
+    shutil.make_archive(output_flywheel, 'zip', output_freesurf)
+
+    shutil.rmtree(output_freesurf)
 
 
 def main():
-    subject_id = 'test'
-    input = 'dir'
-    directive = 'directive'
+    context = flywheel.GearContext()
+    config = context.config
 
-    command = create_command(subject_id, input, directive)
+    # Load in paths to input files for the gear
+    input_volume = context.get_input_path('t1w_anatomy')  # A zip file with NIfTI
+
+    # Load in values from the gear configuration
+    subject_id = config['subject_id']  # Name of folder containing subject i.e., 10000
+    directive = config['directive']  # Flag indicating subset of processing steps i.e., autorecon1
+
+    command = create_command(subject_id, input_volume, directive)
+
     call_command(command)
-    cleanup(subject_id)
+
+    cleanup(subject_id, directive)
