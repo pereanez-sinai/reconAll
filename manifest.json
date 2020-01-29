@@ -7,7 +7,7 @@
   "maintainer": "Flywheel <support@flywheel.io>",
   "source": "https://github.com/flywheel-apps/pereanez-sinai",
   "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all#RequiredArguments",
-  "version": "0.3_6.0",
+  "version": "0.3_6.0_dev1",
   "custom": {
     "docker-image": "pereanez/reconall:0.2",
     "gear-builder": {
