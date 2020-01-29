@@ -7,12 +7,12 @@
   "maintainer": "Flywheel <support@flywheel.io>",
   "source": "https://github.com/flywheel-apps/pereanez-sinai",
   "url": "https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all#RequiredArguments",
-  "version": "0.1_6.0",
+  "version": "0.3_6.0",
   "custom": {
-    "docker-image": "pereanez/reconall:0.1",
+    "docker-image": "pereanez/reconall:0.2",
     "gear-builder": {
       "category": "analysis",
-      "image": "pereanez/reconall:0.1"
+      "image": "pereanez/reconall:0.2"
     }
   },
 
@@ -57,5 +57,7 @@
         "hemi rh"
       ]
     }
-    }
+    },
+
+  "command": "python3 run.py"
 }
