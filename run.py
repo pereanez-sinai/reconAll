@@ -11,6 +11,7 @@ log = logging.getLogger(__name__)
 
 environ_json = '/tmp/gear_environ.json'
 
+
 def set_environment():
 
     # Let's ensure that we have our environment .json file and load it up
@@ -30,6 +31,7 @@ def set_environment():
         log.warning('No Environment file found!')
     # Pass back the environ dict in case the run.py program has need of it later on.
     return environ
+
 
 def create_command(subject_id, input_volume, directive):
     command = 'recon-all -subject {} -i {} -{}'.format(subject_id, input_volume, directive)
